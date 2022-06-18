@@ -1,0 +1,40 @@
+﻿@model IEnumerable<AgendaTelefonica.Models.CompaniaTelefonica>
+
+@{
+    ViewData["Title"] = "Empresas";
+}
+
+<h1 class="text-light">Empresas</h1>
+
+<p>
+    <a asp-action="Create">Agregar nueva</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="text-light">
+                @Html.DisplayNameFor(model => model.IdCompania)
+            </th>
+            <th class="text-light">
+                @Html.DisplayNameFor(model => model.NombreCompania)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td class="text-light">
+                @Html.DisplayFor(modelItem => item.IdCompania)
+            </td>
+            <td class="text-light">
+                @Html.DisplayFor(modelItem => item.NombreCompania)
+            </td>
+            <td class="text-light">
+                <a asp-action="Edit" asp-route-id="@item.IdCompania">Editar</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdCompania">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

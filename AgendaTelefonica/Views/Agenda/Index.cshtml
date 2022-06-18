@@ -1,0 +1,40 @@
+﻿@model IEnumerable<AgendaTelefonica.Models.Agenda>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="text-light">Listado de Agendas</h1>
+
+<p>
+    <a asp-action="Create">Agregar nueva</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="text-light">
+                @Html.DisplayNameFor(model => model.IdAgenda)
+            </th>
+            <th class="text-light">
+                @Html.DisplayNameFor(model => model.NombreAgenda)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td class="text-light">
+                @Html.DisplayFor(modelItem => item.IdAgenda)
+            </td>
+            <td class="text-light">
+                @Html.DisplayFor(modelItem => item.NombreAgenda)
+            </td>
+            <td class="text-light">
+                <a asp-action="Edit" asp-route-id="@item.IdAgenda">Editar</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdAgenda">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

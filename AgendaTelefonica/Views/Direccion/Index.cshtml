@@ -1,0 +1,65 @@
+﻿@model IEnumerable<AgendaTelefonica.Models.Direccion>
+
+@{
+    ViewData["Title"] = "Lista de Direcciones";
+}
+
+<h1 class="text-light">Lista de Direcciones</h1>
+
+<p>
+    <a asp-action="Create">Agregar Nueva</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="text-light">
+                @Html.DisplayNameFor(model => model.IdDireccion)
+            </th>
+            <th class="text-light">
+                @Html.DisplayNameFor(model => model.Calle)
+            </th>
+            <th class="text-light">
+                @Html.DisplayNameFor(model => model.AlturaCalle)
+            </th>
+            <th class="text-light">
+                @Html.DisplayNameFor(model => model.CodigoPostal)
+            </th>
+            <th class="text-light">
+                @Html.DisplayNameFor(model => model.Localidad)
+            </th>
+            <th class="text-light">
+                @Html.DisplayNameFor(model => model.Provincia)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td class="text-light">
+                @Html.DisplayFor(modelItem => item.IdDireccion)
+            </td>
+            <td class="text-light">
+                @Html.DisplayFor(modelItem => item.Calle)
+            </td>
+            <td class="text-light">
+                @Html.DisplayFor(modelItem => item.AlturaCalle)
+            </td>
+            <td class="text-light">
+                @Html.DisplayFor(modelItem => item.CodigoPostal)
+            </td>
+            <td class="text-light">
+                @Html.DisplayFor(modelItem => item.Localidad)
+            </td>
+            <td class="text-light">
+                @Html.DisplayFor(modelItem => item.Provincia)
+            </td>
+            <td class="text-light">
+                <a asp-action="Details" asp-route-id="@item.IdDireccion">Ver</a> |
+                <a asp-action="Edit" asp-route-id="@item.IdDireccion">Editar</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdDireccion">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

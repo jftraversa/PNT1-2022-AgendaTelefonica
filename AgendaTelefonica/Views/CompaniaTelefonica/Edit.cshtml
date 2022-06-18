@@ -1,0 +1,34 @@
+﻿@model AgendaTelefonica.Models.CompaniaTelefonica
+
+@{
+    ViewData["Title"] = "Modificar Empresa Telefónica";
+}
+
+<h1 class="text-light">Modificar Empresa</h1>
+
+<h4 class="text-light">Empresa Telefónica</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdCompania" />
+            <div class="form-group">
+                <label asp-for="NombreCompania" class="control-label text-light"></label>
+                <input asp-for="NombreCompania" class="form-control" />
+                <span asp-validation-for="NombreCompania" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Volver</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

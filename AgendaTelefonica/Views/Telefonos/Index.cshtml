@@ -1,0 +1,53 @@
+﻿@model IEnumerable<AgendaTelefonica.Models.Telefono>
+
+@{
+    ViewData["Title"] = "Ver Teléfonos";
+}
+
+<h1 class="text-light">Lista de Teléfonos</h1>
+
+<p>
+    <a asp-action="Create">Agregar Nuevo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="text-light">
+                @Html.DisplayNameFor(model => model.IdTelefono)
+            </th>
+            <th class="text-light">
+                @Html.DisplayNameFor(model => model.CodigoArea)
+            </th>
+            <th class="text-light">
+                @Html.DisplayNameFor(model => model.Prefijo)
+            </th>
+            <th class="text-light">
+                @Html.DisplayNameFor(model => model.Numero)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td class="text-light">
+                @Html.DisplayFor(modelItem => item.IdTelefono)
+            </td>
+            <td class="text-light">
+                @Html.DisplayFor(modelItem => item.CodigoArea)
+            </td>
+            <td class="text-light">
+                @Html.DisplayFor(modelItem => item.Prefijo)
+            </td>
+            <td class="text-light">
+                @Html.DisplayFor(modelItem => item.Numero)
+            </td>
+            <td class="text-light">
+                <a asp-action="Details" asp-route-id="@item.IdTelefono">Ver</a> |
+                <a asp-action="Edit" asp-route-id="@item.IdTelefono">Editar</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdTelefono">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

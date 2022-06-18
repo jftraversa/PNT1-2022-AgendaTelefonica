@@ -1,0 +1,23 @@
+﻿@model AgendaTelefonica.Models.Agenda
+
+@{
+    ViewData["Title"] = "Ver";
+}
+
+<h1>Ver Agendas</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2 text-light">
+            @Html.DisplayNameFor(model => model.NombreAgenda)
+        </dt>
+        <dd class = "col-sm-10 text-light">
+            @Html.DisplayFor(model => model.NombreAgenda)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.IdAgenda">Modificar</a>
+    <a class="btn btn-primary" asp-action="Index">Volver</a>
+</div>

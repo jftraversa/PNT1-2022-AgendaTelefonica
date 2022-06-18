@@ -1,0 +1,26 @@
+﻿@model AgendaTelefonica.Models.Agenda
+
+@{
+    ViewData["Title"] = "Eliminar Agenda";
+}
+
+<h1 class="text-light">Eliminar Agenda</h1>
+
+<h3 class="text-light">Confirma la eliminación a continuación</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2 text-light">
+            @Html.DisplayNameFor(model => model.NombreAgenda)
+        </dt>
+        <dd class = "col-sm-10 text-light">
+            @Html.DisplayFor(model => model.NombreAgenda)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IdAgenda" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <a asp-action="Index">Volver</a>
+    </form>
+</div>

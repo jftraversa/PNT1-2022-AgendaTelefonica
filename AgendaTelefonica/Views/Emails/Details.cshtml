@@ -1,0 +1,30 @@
+﻿@model AgendaTelefonica.Models.Email
+
+@{
+    ViewData["Title"] = "Ver Detalles";
+}
+
+<h1 class="text-light">Ver Correo Electrónico</h1>
+
+<div>
+    <h4 class="text-light">Correo Electrónico</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2 text-light">
+            @Html.DisplayNameFor(model => model.CorreoElectronico)
+        </dt>
+        <dd class="col-sm-10 text-light">
+            @Html.DisplayFor(model => model.CorreoElectronico)
+        </dd>
+        <dt class="col-sm-2 text-light">
+            Contacto
+        </dt>
+        <dd class="col-sm-10 text-light">
+            @Html.DropDownList("IdContacto", (IEnumerable<SelectListItem>)ViewBag.IdContacto, new { @disabled = "disabled", @class = "form-control w-25" })
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.IdEmail">Modificar</a> 
+    <a class="btn btn-primary" asp-action="Index">Volver</a>
+</div>

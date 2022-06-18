@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewData["Title"] = "Agenda Principal";
+}
+
+<h1 class="text-light">Agenda Principal</h1>
+
+<table class="table" border="0" cellspacing="0" cellpadding="0">
+    <thead>
+        <tr>
+            <td class="text-light">ID</td>
+
+            <td class="text-light">Nombre</td>
+
+            <td class="text-light">Teléfono/s</td>
+
+            <td class="text-light">Direccion/es</td>
+
+            <td class="text-light">Email/s</td>
+        </tr>
+    </thead>
+    <tbody>
+        @using (Html.BeginForm())
+        {
+            foreach (var item in Model)
+            {
+
+                @for (int i = 0; i < @item.Contactos.Count; i++)
+                {
+        <tr>
+            <td class="text-light">
+                 @item.Contactos[i].IdContacto
+            </td>
+
+            <td class="text-light">
+                <a class="text-primary" asp-action="Edit" asp-route-id="@item.Contactos[i].IdContacto" asp-controller="Contactoes"> @item.Contactos[i].NombreCompleto </a>
+            </td>
+
+            <td class="text-light">
+                @for (int j = 0; j < @item.Telefonos.Count; j++)
+                {
+                    @if (@item.Contactos[i].IdContacto == @item.Telefonos[j].IdContacto)
+                    {
+                        <span> <a class="text-info" asp-action="Edit" asp-route-id="@item.Telefonos[j].IdTelefono" asp-controller="Telefonos">@item.Telefonos[j].Prefijo - @item.Telefonos[j].CodigoArea - @item.Telefonos[j].Numero</a> (<a asp-action="Edit" asp-route-id="@item.Empresa[j].IdCompania" asp-controller="CompaniaTelefonica">@item.Empresa[j].NombreCompania</a>) <br /> </span>
+                    }
+                }
+            </td>
+
+            <td class="text-light">
+                @for (int k = 0; k < @item.Direcciones.Count; k++)
+                {
+                    @if (@item.Contactos[i].IdContacto == @item.Direcciones[k].IdContacto)
+                    {
+                        <span> <a class="text-light" asp-action="Edit" asp-route-id="@item.Direcciones[k].IdDireccion" asp-controller="Direccion">@item.Direcciones[k].Calle @item.Direcciones[k].AlturaCalle (C.P @item.Direcciones[k].CodigoPostal) <br /> @item.Direcciones[k].Localidad - @item.Direcciones[k].Provincia</a> <br /> </span>
+                    }
+                }
+            </td>
+
+            <td class="text-light">
+                @for (int k = 0; k < @item.Correo.Count; k++)
+                {
+                    @if (@item.Contactos[i].IdContacto == @item.Correo[k].IdContacto)
+                    {
+                        <span><a class="text-warning" asp-action="Edit" asp-route-id="@item.Correo[k].IdEmail" asp-controller="Emails">@item.Correo[k].CorreoElectronico</a> <br /> </span>
+                    }
+                }
+            </td>
+        </tr>
+                        }
+                    
+                }
+            }
+        </tbody>
+</table>

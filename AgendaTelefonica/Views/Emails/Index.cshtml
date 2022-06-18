@@ -1,0 +1,40 @@
+﻿@model IEnumerable<AgendaTelefonica.Models.Email>
+
+@{
+    ViewData["Title"] = "Ver Correos Electrónicos";
+}
+
+<h1 class="text-light">Lista de Correos Electrónicos</h1>
+
+<p>
+    <a asp-action="Create">Agregar nuevo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="text-light">
+                @Html.DisplayNameFor(model => model.IdEmail)
+            </th>
+            <th class="text-light">
+                @Html.DisplayNameFor(model => model.CorreoElectronico)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td class="text-light">
+                @Html.DisplayFor(modelItem => item.IdEmail)
+            </td>
+            <td class="text-light">
+                @Html.DisplayFor(modelItem => item.CorreoElectronico)
+            </td>
+            <td class="text-light">
+                <a asp-action="Edit" asp-route-id="@item.IdEmail">Editar</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdEmail">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,47 @@
+﻿@model IEnumerable<AgendaTelefonica.Models.Contacto>
+
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<h1 class="text-light">Lista de Contactos</h1>
+
+<p>
+    <a asp-action="Create">Agregar nuevo</a>
+</p>
+
+@using (Html.BeginForm())
+{
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <button class="btn btn-outline-secondary" type="submit" id="button-addon1">Buscar</button>
+        </div>
+        <input type="text" class="form-control" id="SearchString" name="SearchString" placeholder="" aria-describedby="button-addon1">
+    </div>
+}
+
+<table class="table" border="0" cellspacing="0" cellpadding="0">
+    <thead>
+        <tr>
+            <th class="text-light">
+                @Html.ActionLink("Nombre Completo", "Index", new { sortOrder = ViewBag.NameSortParm })
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-light">
+                    @Html.DisplayFor(modelItem => item.NombreCompleto)
+                </td>
+                <td class="text-light">
+                    <a asp-action="Details" asp-route-id="@item.IdContacto">Ver</a> |
+                    <a asp-action="Edit" asp-route-id="@item.IdContacto">Editar</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdContacto">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

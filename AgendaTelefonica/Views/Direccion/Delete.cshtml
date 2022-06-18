@@ -1,0 +1,62 @@
+﻿@model AgendaTelefonica.Models.Direccion
+
+@{
+    ViewData["Title"] = "Eliminar Dirección";
+}
+
+<h1 class="text-light">Eliminar Dirección</h1>
+
+<h3 class="text-light">Confirma la eliminación a continuación</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2 text-light">
+            @Html.DisplayNameFor(model => model.IdDireccion)
+        </dt>
+        <dd class="col-sm-10 text-light">
+            @Html.DisplayFor(model => model.IdDireccion)
+        </dd>
+        <dt class="col-sm-2 text-light">
+            Contacto
+        </dt>
+        <dd class="col-sm-10 text-light">
+            @Html.DropDownList("IdContacto", (IEnumerable<SelectListItem>)ViewBag.IdContacto, new { @disabled = "disabled", @class = "form-control w-25" })
+        </dd>
+        <dt class="col-sm-2 text-light">
+            @Html.DisplayNameFor(model => model.Calle)
+        </dt>
+        <dd class="col-sm-10 text-light">
+            @Html.DisplayFor(model => model.Calle)
+        </dd>
+        <dt class="col-sm-2 text-light">
+            @Html.DisplayNameFor(model => model.AlturaCalle)
+        </dt>
+        <dd class="col-sm-10 text-light">
+            @Html.DisplayFor(model => model.AlturaCalle)
+        </dd>
+        <dt class="col-sm-2 text-light">
+            @Html.DisplayNameFor(model => model.CodigoPostal)
+        </dt>
+        <dd class="col-sm-10 text-light">
+            @Html.DisplayFor(model => model.CodigoPostal)
+        </dd>
+        <dt class="col-sm-2 text-light">
+            @Html.DisplayNameFor(model => model.Localidad)
+        </dt>
+        <dd class="col-sm-10 text-light">
+            @Html.DisplayFor(model => model.Localidad)
+        </dd>
+        <dt class="col-sm-2 text-light">
+            @Html.DisplayNameFor(model => model.Provincia)
+        </dt>
+        <dd class="col-sm-10 text-light">
+            @Html.DisplayFor(model => model.Provincia)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IdDireccion" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <a asp-action="Index">Volver</a>
+    </form>
+</div>

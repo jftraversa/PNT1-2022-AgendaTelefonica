@@ -1,0 +1,32 @@
+﻿@model AgendaTelefonica.Models.Email
+
+@{
+    ViewData["Title"] = "Eliminar Correo Electrónico";
+}
+
+<h1 class="text-light">Eliminar Correo Electrónico</h1>
+
+<h3 class="text-light">Confirma la eliminación a continuación</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2 text-light">
+            @Html.DisplayNameFor(model => model.CorreoElectronico)
+        </dt>
+        <dd class="col-sm-10 text-light">
+            @Html.DisplayFor(model => model.CorreoElectronico)
+        </dd>
+        <dt class="col-sm-2 text-light">
+            Contacto
+        </dt>
+        <dd class="col-sm-10 text-light">
+            @Html.DropDownList("IdContacto", (IEnumerable<SelectListItem>)ViewBag.IdContacto, new { @disabled ="disabled", @class = "form-control w-25" })
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IdEmail" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <a asp-action="Index">Volver</a>
+    </form>
+</div>
