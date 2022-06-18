@@ -64,7 +64,6 @@ namespace AgendaTelefonica.Controllers
         // GET: Contactoes/Create
         public IActionResult Create()
         {
-            ViewBag.Telefonos = new SelectList(_context.Telefono, "IdTelefono", "Numero");
             return View();
         }
 
@@ -93,7 +92,6 @@ namespace AgendaTelefonica.Controllers
             }
 
             var contacto = await _context.Contacto.FindAsync(id);
-            ViewBag.IdContacto = new SelectList(_context.Telefono, "IdContacto", "Numero", contacto.IdContacto);
 
             if (contacto == null)
             {
