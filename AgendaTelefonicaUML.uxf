@@ -1,0 +1,52 @@
+<diagram program="umletino" version="15.0.0"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>660</x><y>20</y><w>210</w><h>190</h></coordinates><panel_attributes>Agenda
+--
+- idAgenda: int
+- NombreAgenda: String
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>640</x><y>300</y><w>240</w><h>190</h></coordinates><panel_attributes>Contacto
+-
+- idAgenda: int
+- idContacto: int
+- NombreCompleto: String
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>270</x><y>600</y><w>210</w><h>190</h></coordinates><panel_attributes>Direccion
+-
+- idDireccion: int
+- idContacto: int
+- Calle: String
+- alturaCalle: int
+- codigoPostal: int
+- localidad: String
+- provincia: String
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>510</x><y>600</y><w>210</w><h>190</h></coordinates><panel_attributes>Telefono
+-
+- idTelefono: int
+- idContacto: int
+- idCompania: int
+- codigoArea: int
+- prefijo: int
+- numero: int
+-
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>750</x><y>600</y><w>210</w><h>190</h></coordinates><panel_attributes>Email
+-
+- idEmail: int
+- idContacto: int
+- CorreoElectronico: String
+-
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>990</x><y>600</y><w>210</w><h>190</h></coordinates><panel_attributes>CompaniaTelefonica
+-
+- idCompania: int
+- NombreCompania: String
+-
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>750</x><y>200</y><w>120</w><h>120</h></coordinates><panel_attributes>lt=&lt;-
+listaDeContactos
+m1=0..*</panel_attributes><additional_attributes>10;100;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>360</x><y>390</y><w>300</w><h>230</h></coordinates><panel_attributes>lt=&lt;-
+- Direcciones
+m1=0..*</panel_attributes><additional_attributes>10;210;10;80;280;10</additional_attributes></element><element><id>Relation</id><coordinates><x>680</x><y>480</y><w>90</w><h>140</h></coordinates><panel_attributes>lt=&lt;-
+- Telefonos
+m1=0..*</panel_attributes><additional_attributes>10;120;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>840</x><y>480</y><w>150</w><h>140</h></coordinates><panel_attributes>lt=&lt;-
+- correosElectronicos
+m1=0..*</panel_attributes><additional_attributes>10;120;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>600</x><y>780</y><w>530</w><h>130</h></coordinates><panel_attributes>lt=&lt;-
+- compania
+m1=1</panel_attributes><additional_attributes>500;10;500;110;10;110;10;10</additional_attributes></element></diagram>
