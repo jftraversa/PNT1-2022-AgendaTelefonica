@@ -44,6 +44,9 @@ namespace AgendaTelefonica.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("FK_TelefonoIdTelefono")
+                        .HasColumnType("int");
+
                     b.Property<string>("NombreCompania")
                         .IsRequired()
                         .HasColumnType("varchar(50)")
@@ -51,6 +54,8 @@ namespace AgendaTelefonica.Migrations
                         .IsUnicode(false);
 
                     b.HasKey("IdCompania");
+
+                    b.HasIndex("FK_TelefonoIdTelefono");
 
                     b.ToTable("CompaniaTelefonica");
                 });
@@ -62,6 +67,9 @@ namespace AgendaTelefonica.Migrations
                         .HasColumnName("idContacto")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("FK_AgendaIdAgenda")
+                        .HasColumnType("int");
 
                     b.Property<int?>("IdAgenda")
                         .HasColumnType("int");
@@ -76,6 +84,8 @@ namespace AgendaTelefonica.Migrations
                         .IsUnicode(false);
 
                     b.HasKey("IdContacto");
+
+                    b.HasIndex("FK_AgendaIdAgenda");
 
                     b.ToTable("Contacto");
                 });
@@ -102,6 +112,9 @@ namespace AgendaTelefonica.Migrations
                         .IsRequired()
                         .HasColumnType("int");
 
+                    b.Property<int?>("FK_ContactoIdContacto")
+                        .HasColumnType("int");
+
                     b.Property<int?>("IdContacto")
                         .HasColumnName("idContacto")
                         .HasColumnType("int");
@@ -120,6 +133,8 @@ namespace AgendaTelefonica.Migrations
 
                     b.HasKey("IdDireccion");
 
+                    b.HasIndex("FK_ContactoIdContacto");
+
                     b.ToTable("Direccion");
                 });
 
@@ -137,10 +152,15 @@ namespace AgendaTelefonica.Migrations
                         .HasMaxLength(75)
                         .IsUnicode(false);
 
+                    b.Property<int?>("FK_ContactoIdContacto")
+                        .HasColumnType("int");
+
                     b.Property<int>("IdContacto")
                         .HasColumnType("int");
 
                     b.HasKey("IdEmail");
+
+                    b.HasIndex("FK_ContactoIdContacto");
 
                     b.ToTable("Email");
                 });
@@ -155,6 +175,9 @@ namespace AgendaTelefonica.Migrations
 
                     b.Property<int?>("CodigoArea")
                         .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("FK_ContactoIdContacto")
                         .HasColumnType("int");
 
                     b.Property<int?>("IdCompania")
@@ -174,7 +197,44 @@ namespace AgendaTelefonica.Migrations
 
                     b.HasKey("IdTelefono");
 
+                    b.HasIndex("FK_ContactoIdContacto");
+
                     b.ToTable("Telefono");
+                });
+
+            modelBuilder.Entity("AgendaTelefonica.Models.CompaniaTelefonica", b =>
+                {
+                    b.HasOne("AgendaTelefonica.Models.Telefono", "FK_Telefono")
+                        .WithMany()
+                        .HasForeignKey("FK_TelefonoIdTelefono");
+                });
+
+            modelBuilder.Entity("AgendaTelefonica.Models.Contacto", b =>
+                {
+                    b.HasOne("AgendaTelefonica.Models.Agenda", "FK_Agenda")
+                        .WithMany()
+                        .HasForeignKey("FK_AgendaIdAgenda");
+                });
+
+            modelBuilder.Entity("AgendaTelefonica.Models.Direccion", b =>
+                {
+                    b.HasOne("AgendaTelefonica.Models.Contacto", "FK_Contacto")
+                        .WithMany()
+                        .HasForeignKey("FK_ContactoIdContacto");
+                });
+
+            modelBuilder.Entity("AgendaTelefonica.Models.Email", b =>
+                {
+                    b.HasOne("AgendaTelefonica.Models.Contacto", "FK_Contacto")
+                        .WithMany()
+                        .HasForeignKey("FK_ContactoIdContacto");
+                });
+
+            modelBuilder.Entity("AgendaTelefonica.Models.Telefono", b =>
+                {
+                    b.HasOne("AgendaTelefonica.Models.Contacto", "FK_Contacto")
+                        .WithMany()
+                        .HasForeignKey("FK_ContactoIdContacto");
                 });
 #pragma warning restore 612, 618
         }

@@ -2,7 +2,7 @@
 
 namespace AgendaTelefonica.Migrations
 {
-    public partial class Init : Migration
+    public partial class Init2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,31 +20,24 @@ namespace AgendaTelefonica.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CompaniaTelefonica",
-                columns: table => new
-                {
-                    IdCompania = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NombreCompania = table.Column<string>(unicode: false, maxLength: 50, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CompaniaTelefonica", x => x.IdCompania);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Contacto",
                 columns: table => new
                 {
                     idContacto = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdAgenda = table.Column<int>(nullable: true),
-                    NombreCompleto = table.Column<string>(unicode: false, maxLength: 100, nullable: false),
-                    IdTelefono = table.Column<int>(nullable: false)
+                    NombreCompleto = table.Column<string>(unicode: false, maxLength: 100, nullable: false)
+                    /*FK_AgendaIdAgenda = table.Column<int>(nullable: true)*/
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Contacto", x => x.idContacto);
+                    table.ForeignKey(
+                        name: "FK_Contacto_Agenda",
+                        column: x => x.IdAgenda,
+                        principalTable: "Agenda",
+                        principalColumn: "IdAgenda",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -59,10 +52,17 @@ namespace AgendaTelefonica.Migrations
                     CodigoPostal = table.Column<int>(nullable: false),
                     Localidad = table.Column<string>(unicode: false, maxLength: 50, nullable: false),
                     Provincia = table.Column<string>(unicode: false, maxLength: 50, nullable: false)
+                    /*FK_ContactoIdContacto = table.Column<int>(nullable: true)*/
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Direccion", x => x.idDireccion);
+                    table.ForeignKey(
+                        name: "FK_Direccion_Contacto",
+                        column: x => x.idContacto,
+                        principalTable: "Contacto",
+                        principalColumn: "idContacto",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -73,44 +73,65 @@ namespace AgendaTelefonica.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CorreoElectronico = table.Column<string>(unicode: false, maxLength: 75, nullable: false),
                     IdContacto = table.Column<int>(nullable: false)
+                    /*FK_ContactoIdContacto = table.Column<int>(nullable: true)*/
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Email", x => x.idEmail);
+                    table.ForeignKey(
+                        name: "FK_Email_Contacto",
+                        column: x => x.IdContacto,
+                        principalTable: "Contacto",
+                        principalColumn: "idContacto",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Telefono",
                 columns: table => new
                 {
-                    idTelefono = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
                     idContacto = table.Column<int>(nullable: true),
-                    IdCompania = table.Column<int>(nullable: true),
+                    IdCompania = table.Column<int>(nullable: false),
                     CodigoArea = table.Column<int>(nullable: false),
                     Prefijo = table.Column<int>(nullable: false),
                     Numero = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Telefono", x => x.idTelefono);
+                    table.PrimaryKey("PK_Telefono", x => x.IdCompania);
+                    table.ForeignKey(
+                        name: "FK_Telefono_Contacto",
+                        column: x => x.idContacto,
+                        principalTable: "Contacto",
+                        principalColumn: "idContacto",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.Sql("SET IDENTITY_INSERT Agenda ON");
-            migrationBuilder.Sql("INSERT INTO Agenda (IdAgenda, NombreAgenda) VALUES (1, 'Agenda #1')");
-            migrationBuilder.Sql("SET IDENTITY_INSERT Agenda OFF");
+            migrationBuilder.CreateTable(
+                name: "CompaniaTelefonica",
+                columns: table => new
+                {
+                    IdCompania = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NombreCompania = table.Column<string>(unicode: false, maxLength: 50, nullable: false)/*,
+                    FK_TelefonoIdTelefono = table.Column<int>(nullable: true)*/
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CompaniaTelefonica", x => x.IdCompania);
+                    table.ForeignKey(
+                        name: "FK_CompaniaTelefonica_Telefono",
+                        column: x => x.IdCompania,
+                        principalTable: "Telefono",
+                        principalColumn: "IdCompania",
+                        onDelete: ReferentialAction.Restrict);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Agenda");
-
-            migrationBuilder.DropTable(
                 name: "CompaniaTelefonica");
-
-            migrationBuilder.DropTable(
-                name: "Contacto");
 
             migrationBuilder.DropTable(
                 name: "Direccion");
@@ -120,6 +141,12 @@ namespace AgendaTelefonica.Migrations
 
             migrationBuilder.DropTable(
                 name: "Telefono");
+
+            migrationBuilder.DropTable(
+                name: "Contacto");
+
+            migrationBuilder.DropTable(
+                name: "Agenda");
         }
     }
 }

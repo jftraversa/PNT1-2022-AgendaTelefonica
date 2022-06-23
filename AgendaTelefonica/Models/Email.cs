@@ -21,5 +21,6 @@ namespace AgendaTelefonica.Models
         public string CorreoElectronico { get; set; }
 
         public int IdContacto { get; set; }
+        public virtual Contacto FK_Contacto { get; set; }
     }
 }

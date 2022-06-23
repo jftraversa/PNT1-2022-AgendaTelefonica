@@ -36,5 +36,7 @@ namespace AgendaTelefonica.Models
         [Required]
         [Display(Name = "Provincia")]
         public string Provincia { get; set; }
+
+        public virtual Contacto FK_Contacto { get; set; }
     }
 }

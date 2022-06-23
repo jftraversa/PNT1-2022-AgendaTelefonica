@@ -31,5 +31,7 @@ namespace AgendaTelefonica.Models
         [Required]
         [Display(Name = "Número")]
         public int? Numero { get; set; }
+
+        public virtual Contacto FK_Contacto { get; set; }
     }
 }

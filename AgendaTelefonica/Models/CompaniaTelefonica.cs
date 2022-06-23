@@ -19,5 +19,7 @@ namespace AgendaTelefonica.Models
         [Required]
         [Display(Name = "Compañia Telefonica")]
         public string NombreCompania { get; set; }
+
+        public virtual Telefono FK_Telefono { get; set; }
     }
 }

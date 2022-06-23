@@ -21,6 +21,6 @@ namespace AgendaTelefonica.Models
         [Display(Name = "Nombre completo")]
         public string NombreCompleto { get; set; }
 
-        public int IdTelefono { get; set; }
+        public virtual Agenda FK_Agenda { get; set; }
     }
 }
