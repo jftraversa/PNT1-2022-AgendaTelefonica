@@ -20,18 +20,19 @@ namespace AgendaTelefonica.Models
         [Display(Name = "Empresa")]
         public int? IdCompania { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El campo del Código de Area es requerido")]
         [Display(Name = "Código de Area")]
         public int? CodigoArea { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El campo del Prefijo es requerido")]       
         [Display(Name = "Prefijo")]
         public int? Prefijo { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El campo del Número es requerido")]
         [Display(Name = "Número")]
         public int? Numero { get; set; }
 
+        [NotMapped]
         public virtual Contacto FK_Contacto { get; set; }
     }
 }

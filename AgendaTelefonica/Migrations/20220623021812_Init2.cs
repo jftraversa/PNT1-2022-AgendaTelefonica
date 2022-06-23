@@ -26,6 +26,7 @@ namespace AgendaTelefonica.Migrations
                     idContacto = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdAgenda = table.Column<int>(nullable: true),
+                    idTelefono = table.Column<int>(nullable: true),
                     NombreCompleto = table.Column<string>(unicode: false, maxLength: 100, nullable: false)
                     /*FK_AgendaIdAgenda = table.Column<int>(nullable: true)*/
                 },
@@ -87,9 +88,24 @@ namespace AgendaTelefonica.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CompaniaTelefonica",
+                columns: table => new
+                {
+                    IdCompania = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NombreCompania = table.Column<string>(unicode: false, maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CompaniaTelefonica", x => x.IdCompania);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Telefono",
                 columns: table => new
                 {
+                    idTelefono = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     idContacto = table.Column<int>(nullable: true),
                     IdCompania = table.Column<int>(nullable: false),
                     CodigoArea = table.Column<int>(nullable: false),
@@ -98,34 +114,21 @@ namespace AgendaTelefonica.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Telefono", x => x.IdCompania);
+                    table.PrimaryKey("PK_Telefono", x => x.idTelefono);
                     table.ForeignKey(
                         name: "FK_Telefono_Contacto",
                         column: x => x.idContacto,
                         principalTable: "Contacto",
                         principalColumn: "idContacto",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CompaniaTelefonica",
-                columns: table => new
-                {
-                    IdCompania = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NombreCompania = table.Column<string>(unicode: false, maxLength: 50, nullable: false)/*,
-                    FK_TelefonoIdTelefono = table.Column<int>(nullable: true)*/
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CompaniaTelefonica", x => x.IdCompania);
                     table.ForeignKey(
-                        name: "FK_CompaniaTelefonica_Telefono",
+                        name: "FK_Telefono_CompaniaTelefonica",
                         column: x => x.IdCompania,
-                        principalTable: "Telefono",
+                        principalTable: "CompaniaTelefonica",
                         principalColumn: "IdCompania",
                         onDelete: ReferentialAction.Restrict);
                 });
+
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

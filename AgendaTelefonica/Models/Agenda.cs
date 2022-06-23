@@ -16,7 +16,7 @@ namespace AgendaTelefonica.Models
         [Display(Name = "ID")]
         public int IdAgenda { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El formato del Nombre es incorrecto")]
         [Display(Name = "Nombre de la Agenda")]
         public string NombreAgenda { get; set; }
     }

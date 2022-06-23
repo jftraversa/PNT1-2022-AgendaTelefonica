@@ -17,10 +17,13 @@ namespace AgendaTelefonica.Models
 
         public int? IdAgenda { get; set; }
 
-        [Required]
+        public int idTelefono { get; set; }
+
+        [Required(ErrorMessage = "El formato del Nombre es requerido")]
         [Display(Name = "Nombre completo")]
         public string NombreCompleto { get; set; }
 
+        [NotMapped]
         public virtual Agenda FK_Agenda { get; set; }
     }
 }

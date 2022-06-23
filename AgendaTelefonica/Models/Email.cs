@@ -16,11 +16,13 @@ namespace AgendaTelefonica.Models
         [Display(Name = "ID")]
         public int? IdEmail { get; set; }
 
-        [Required(ErrorMessage = "El formato del correo electrónico es incorrecto")]
+        [Required(ErrorMessage = "El campo del correo electrónico es requerido")]
         [Display(Name = "Correo Electrónico")]
         public string CorreoElectronico { get; set; }
 
         public int IdContacto { get; set; }
+
+        [NotMapped]
         public virtual Contacto FK_Contacto { get; set; }
     }
 }

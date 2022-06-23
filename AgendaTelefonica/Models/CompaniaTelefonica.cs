@@ -16,10 +16,11 @@ namespace AgendaTelefonica.Models
         [Display(Name = "ID")]
         public int? IdCompania { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El nombre de la empresa es requerido")]
         [Display(Name = "Compañia Telefonica")]
         public string NombreCompania { get; set; }
 
+        [NotMapped]
         public virtual Telefono FK_Telefono { get; set; }
     }
 }
